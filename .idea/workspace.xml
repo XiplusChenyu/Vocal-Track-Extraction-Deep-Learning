@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0500d22b-13ab-491c-8755-f47ab3a8caa5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Speech Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Speech Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/.ipynb_checkpoints/data_dealer-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/data_dealer.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Build_Dataset.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Build_Dataset.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +15,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/config.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -30,9 +24,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -52,12 +50,13 @@
       <list>
         <option value="$PROJECT_DIR$/Scripts/data_dealer.ipynb" />
         <option value="$PROJECT_DIR$/Scripts/config.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="495" />
-    <option name="y" value="50" />
+    <option name="x" value="389" />
+    <option name="y" value="23" />
     <option name="width" value="1073" />
     <option name="height" value="902" />
   </component>
@@ -154,17 +153,17 @@
       <workItem from="1555523278120" duration="334000" />
       <workItem from="1555610394358" duration="9000" />
       <workItem from="1555610427676" duration="75000" />
-      <workItem from="1555610583936" duration="1189000" />
+      <workItem from="1555610583936" duration="1665000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5597000" />
+    <option name="totallyTimeSpent" value="6073000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="495" y="50" width="1073" height="902" extended-state="0" />
+    <frame x="389" y="23" width="1073" height="902" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22890398" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22890398" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -178,7 +177,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.15432099" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.15432099" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -200,7 +199,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
