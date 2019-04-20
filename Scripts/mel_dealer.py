@@ -82,3 +82,8 @@ def griffin_lim(magnitude, n_fft, hop_length, n_iterations):
 def invert_magnitude_phase(magnitude, phase_angle):
     phase = np.cos(phase_angle) + 1.j * np.sin(phase_angle)
     return magnitude * phase
+
+
+mel_converter = MelConverter()
+
+
