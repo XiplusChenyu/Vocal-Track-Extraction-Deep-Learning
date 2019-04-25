@@ -1,22 +1,26 @@
 import torch
 import numpy as np
 import h5py
+import librosa
 from torch.utils.data import Dataset, DataLoader
 from config import PARAS
 import cv2
 
+"""
+Be careful:
+We use log mel-spectrogram for training,
+while the mask generated is for power mel-spectrogram
+"""
 
-def create_gt_mask(vocal_spec, bg_spec, mix):
+
+def create_gt_mask(vocal_spec, bg_spec):
     """
-    Take in log spectrogram and return a map with segmentation TF * C, dimension C is for C sources
-    1 if the sound is dominated in the TF-bin, while 0 for not
+    Take in log spectrogram and return a mask map for TF bins
+    1 if the vocal sound is dominated in the TF-bin, while 0 for not
     """
     vocal_spec = vocal_spec.transpose(0, 2).numpy()
     bg_spec = bg_spec.transpose(0, 2).numpy()
-    mix = mix.transpose(0, 2).numpy()
-    d1 = vocal_spec / mix
-    d2 = bg_spec / mix
-    return cv2.merge([d1, d2])
+    return np.array(vocal_spec > bg_spec, dtype=np.int)
 
 
 class TorchData(Dataset):
@@ -49,11 +53,11 @@ class TorchData(Dataset):
         vocal = np.reshape(vocal, (1, vocal.shape[0], vocal.shape[1]))
         vocal = torch.from_numpy(vocal)
 
-        target = torch.from_numpy(create_gt_mask(vocal, bg, mix)).transpose(0, 2)
+        target = torch.from_numpy(create_gt_mask(vocal, bg)).transpose(0, 2)
 
         sample = {
-            'vocal': vocal,
-            'bg': bg,
+            'vocal': vocal,  # this is used for test
+            'bg': bg,  # this is used for test
             'mix': mix,
             'target': target,
         }
@@ -84,4 +88,5 @@ if __name__ == '__main__':
         print(data_item['vocal'].shape)
         print(data_item['bg'].shape)
         print(data_item['mix'].shape)
+        print(data_item['target'].shape)
         break
