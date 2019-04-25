@@ -3,6 +3,20 @@ import numpy as np
 import h5py
 from torch.utils.data import Dataset, DataLoader
 from config import PARAS
+import cv2
+
+
+def create_gt_mask(vocal_spec, bg_spec, mix):
+    """
+    Take in log spectrogram and return a map with segmentation TF * C, dimension C is for C sources
+    1 if the sound is dominated in the TF-bin, while 0 for not
+    """
+    vocal_spec = vocal_spec.transpose(0, 2).numpy()
+    bg_spec = bg_spec.transpose(0, 2).numpy()
+    mix = mix.transpose(0, 2).numpy()
+    d1 = vocal_spec / mix
+    d2 = bg_spec / mix
+    return cv2.merge([d1, d2])
 
 
 class TorchData(Dataset):
@@ -13,31 +27,35 @@ class TorchData(Dataset):
         """
         super(TorchData, self).__init__()
         self.dataset = h5py.File(dataset_path, 'r')
-        self.mix = self.dataset['mix']
         self.bg = self.dataset['bg']
         self.vocal = self.dataset['vocal']
-        self.len = self.mix.shape[0]
+        self.mix = self.dataset['mix']
+        self.len = self.bg.shape[0]
 
     def __len__(self):
         return self.len
 
     def __getitem__(self, index):
+        bg = self.bg[index].astype(np.float32)
+        vocal = self.vocal[index].astype(np.float32)
         mix = self.mix[index].astype(np.float32)
+
         mix = np.reshape(mix, (1, mix.shape[0], mix.shape[1]))
         mix = torch.from_numpy(mix)
 
-        bg = self.bg[index].astype(np.float32)
         bg = np.reshape(bg, (1, bg.shape[0], bg.shape[1]))
         bg = torch.from_numpy(bg)
 
-        vocal = self.vocal[index].astype(np.float32)
         vocal = np.reshape(vocal, (1, vocal.shape[0], vocal.shape[1]))
         vocal = torch.from_numpy(vocal)
+
+        target = torch.from_numpy(create_gt_mask(vocal, bg, mix)).transpose(0, 2)
 
         sample = {
             'vocal': vocal,
             'bg': bg,
             'mix': mix,
+            'target': target,
         }
 
         return sample
@@ -62,8 +80,8 @@ test_loader = torch_dataset_loader(PARAS.TEST_DATA_PATH, PARAS.BATCH_SIZE, False
 
 if __name__ == '__main__':
 
-    for index, data_item in enumerate(train_loader):
+    for index, data_item in enumerate(test_loader):
         print(data_item['vocal'].shape)
-        print(data_item['mix'].shape)
+        print(data_item['bg'].shape)
         print(data_item['mix'].shape)
         break
