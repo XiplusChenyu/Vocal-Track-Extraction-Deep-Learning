@@ -22,7 +22,7 @@ def train(model, epoch, versatile=True):
     _index = 0
 
     for _index, data in enumerate(train_loader):
-        spec_input, target = data['mel'], data['target']
+        spec_input, target = data['mix'], data['target']
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
@@ -63,7 +63,7 @@ def validate_test(model, epoch, test=False):
     data_loader_use = validation_loader if not test else test_loader
     _index = 0
     for _index, data in enumerate(data_loader_use):
-        spec_input, target = data['mel'], data['target']
+        spec_input, target = data['mix'], data['target']
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
