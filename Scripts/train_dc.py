@@ -23,6 +23,8 @@ def train(model, epoch, versatile=True):
 
     for _index, data in enumerate(train_loader):
         spec_input, target = data['mix'], data['target']
+        shape = spec_input.size()
+        target = target.view((shape[0], shape[1] * shape[2], -1))
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
@@ -64,6 +66,8 @@ def validate_test(model, epoch, test=False):
     _index = 0
     for _index, data in enumerate(data_loader_use):
         spec_input, target = data['mix'], data['target']
+        shape = spec_input.size()
+        target = target.view((shape[0], shape[1] * shape[2], -1))
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
