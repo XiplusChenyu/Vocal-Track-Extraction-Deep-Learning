@@ -32,11 +32,12 @@ class Model(nn.Module):
 
     def forward(self, inp):
         # batch, seq, feature
+        n, t, f = inp.size()
         out, _ = self.blstm(inp)
         out = self.embedding(out)
         out = self.activation(out)
 
-        out = out.view(PARAS.BATCH_SIZE, -1, self.embedding_dim)
+        out = out.view(n, -1, self.embedding_dim)
         # batch, TF, embedding
 
         # normalization over embedding dim

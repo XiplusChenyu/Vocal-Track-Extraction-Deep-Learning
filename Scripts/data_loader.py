@@ -87,4 +87,3 @@ if __name__ == '__main__':
         print(data_item['bg'].shape)
         print(data_item['mix'].shape)
         print(data_item['target'].shape)
-        break

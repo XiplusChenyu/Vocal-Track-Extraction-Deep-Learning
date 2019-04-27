@@ -10,7 +10,7 @@ from data_loader import train_loader, validation_loader, test_loader
 
 PARAS.LOG_STEP = len(train_loader) // 16
 
-optimizer = torch.optim.RMSprop(D_model.parameters(), lr=1e-4)
+optimizer = torch.optim.RMSprop(D_model.parameters(), lr=1e-5)
 scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
 
 
