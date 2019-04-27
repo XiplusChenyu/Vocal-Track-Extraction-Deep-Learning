@@ -6,3 +6,5 @@ Archive.zip
 **/.ipynb_checkpoints
 **/__pycache__
 test.ipynb
+Model/
+Log/

@@ -1,10 +1,8 @@
 import torch
 import numpy as np
 import h5py
-import librosa
 from torch.utils.data import Dataset, DataLoader
 from config import PARAS
-import cv2
 
 """
 Be careful:
@@ -18,9 +16,9 @@ def create_gt_mask(vocal_spec, bg_spec):
     Take in log spectrogram and return a mask map for TF bins
     1 if the vocal sound is dominated in the TF-bin, while 0 for not
     """
-    vocal_spec = vocal_spec.transpose(0, 2).numpy()
-    bg_spec = bg_spec.transpose(0, 2).numpy()
-    return np.array(vocal_spec > bg_spec, dtype=np.int)
+    vocal_spec = vocal_spec.numpy()
+    bg_spec = bg_spec.numpy()
+    return np.array(vocal_spec > bg_spec, dtype=np.float32)
 
 
 class TorchData(Dataset):
@@ -44,16 +42,16 @@ class TorchData(Dataset):
         vocal = self.vocal[index].astype(np.float32)
         mix = self.mix[index].astype(np.float32)
 
-        mix = np.reshape(mix, (1, mix.shape[0], mix.shape[1]))
+        # mix = np.reshape(mix, (1, mix.shape[0], mix.shape[1]))
         mix = torch.from_numpy(mix)
 
-        bg = np.reshape(bg, (1, bg.shape[0], bg.shape[1]))
+        # bg = np.reshape(bg, (1, bg.shape[0], bg.shape[1]))
         bg = torch.from_numpy(bg)
 
-        vocal = np.reshape(vocal, (1, vocal.shape[0], vocal.shape[1]))
+        # vocal = np.reshape(vocal, (1, vocal.shape[0], vocal.shape[1]))
         vocal = torch.from_numpy(vocal)
 
-        target = torch.from_numpy(create_gt_mask(vocal, bg)).transpose(0, 2)
+        target = torch.from_numpy(create_gt_mask(vocal, bg))  # .transpose(0, 2)
 
         sample = {
             'vocal': vocal,  # this is used for test
