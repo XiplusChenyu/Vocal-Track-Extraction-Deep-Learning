@@ -92,7 +92,7 @@ def validate_test(model, epoch, test=False):
 
 
 if __name__ == '__main__':
-    t_loss, v_loss = [], []
+    t_loss, v_loss = list(), list()
     decay_cnt = 0
 
     for epoch in range(1, PARAS.EPOCH_NUM + 1):
@@ -105,6 +105,14 @@ if __name__ == '__main__':
         t_loss.append(train_loss)
         v_loss.append(validation_loss)
 
+        if np.min(v_loss[:-8]) == v_loss[-1]:
+            print("****exit in epoch {0}*****".format(epoch))
+            with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
+                json.dump(t_loss, t)
+                json.dump(v_loss, v)
+
+            break
+
         # use loss to find the best model
         if np.max(t_loss) == t_loss[-1]:
             print('***Found Best Training Model***')
@@ -115,7 +123,7 @@ if __name__ == '__main__':
 
         print('-' * 99)
 
-        # Use BCE loss value for learning rate scheduling
+        # Use loss value for learning rate scheduling
         decay_cnt += 1
 
         if np.min(t_loss) not in t_loss[-3:] and decay_cnt > 2:
@@ -124,6 +132,6 @@ if __name__ == '__main__':
             print('***Learning rate decreased***')
             print('-' * 99)
 
-    with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
-        json.dump(t_loss, t)
-        json.dump(v_loss, v)
+        with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
+            json.dump(t_loss, t)
+            json.dump(v_loss, v)
