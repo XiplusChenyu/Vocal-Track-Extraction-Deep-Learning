@@ -18,7 +18,7 @@ class PARAS:
     V_LOG_PATH = '../Log/valid_loss.json'
 
     BATCH_SIZE = 16
-    EPOCH_NUM = 200
+    EPOCH_NUM = 100
 
     USE_CUDA = True
     CUDA = torch.cuda.is_available() and USE_CUDA
