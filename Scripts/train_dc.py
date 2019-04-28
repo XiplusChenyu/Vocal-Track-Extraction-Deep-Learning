@@ -8,7 +8,7 @@ from utils import loss_function_dc
 from config import PARAS
 from data_loader import train_loader, validation_loader, test_loader
 
-PARAS.LOG_STEP = len(train_loader) // 16
+PARAS.LOG_STEP = len(train_loader) // 4
 
 optimizer = torch.optim.RMSprop(D_model.parameters(), lr=1e-5)
 scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
@@ -105,7 +105,7 @@ if __name__ == '__main__':
         t_loss.append(train_loss)
         v_loss.append(validation_loss)
 
-        if np.min(v_loss[:-8]) == v_loss[-1]:
+        if len(v_loss) > 10 and np.min(v_loss[:-8]) == v_loss[-1]:
             print("****exit in epoch {0}*****".format(epoch))
             with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
                 json.dump(t_loss, t)
