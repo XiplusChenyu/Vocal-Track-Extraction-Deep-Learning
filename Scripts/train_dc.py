@@ -105,7 +105,7 @@ if __name__ == '__main__':
         t_loss.append(train_loss)
         v_loss.append(validation_loss)
 
-        if len(v_loss) > 10 and np.min(v_loss[:-8]) == v_loss[-1]:
+        if len(v_loss) > 10 and np.max(v_loss[:-8]) == v_loss[-1]:
             print("****exit in epoch {0}*****".format(epoch))
             with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
                 json.dump(t_loss, t)
@@ -114,9 +114,9 @@ if __name__ == '__main__':
             break
 
         # use loss to find the best model
-        if np.max(t_loss) == t_loss[-1]:
+        if np.min(t_loss) == t_loss[-1]:
             print('***Found Best Training Model***')
-        if np.max(v_loss) == v_loss[-1]:
+        if np.min(v_loss) == v_loss[-1]:
             with open(PARAS.MODEL_SAVE_PATH_1, 'wb') as f:
                 torch.save(D_model.cpu().state_dict(), f)
                 print('***Best Validation Model Found and Saved***')
