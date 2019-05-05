@@ -42,16 +42,10 @@ class TorchData(Dataset):
         vocal = self.vocal[index].astype(np.float32)
         mix = self.mix[index].astype(np.float32)
 
-        # mix = np.reshape(mix, (1, mix.shape[0], mix.shape[1]))
         mix = torch.from_numpy(mix)
-
-        # bg = np.reshape(bg, (1, bg.shape[0], bg.shape[1]))
         bg = torch.from_numpy(bg)
-
-        # vocal = np.reshape(vocal, (1, vocal.shape[0], vocal.shape[1]))
         vocal = torch.from_numpy(vocal)
-
-        target = torch.from_numpy(create_gt_mask(vocal, bg))  # .transpose(0, 2)
+        target = torch.from_numpy(create_gt_mask(vocal, bg))
 
         sample = {
             'vocal': vocal,  # this is used for test

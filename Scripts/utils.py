@@ -1,5 +1,6 @@
 import torch
 
+
 def loss_function_dc(embedding, target):
     """
     Implement loss function
