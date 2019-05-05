@@ -6,7 +6,7 @@ torch.manual_seed(1)
 
 
 class Model(nn.Module):
-    def __init__(self, feature=150, hidden_size=500, embedding_dim=20):
+    def __init__(self, feature=150, hidden_size=256, embedding_dim=10):
         super(Model, self).__init__()
         self.embedding_dim = embedding_dim
 
@@ -14,7 +14,7 @@ class Model(nn.Module):
                           hidden_size=hidden_size,
                           num_layers=4,
                           batch_first=True,
-                          dropout=0.4,
+                          dropout=0.9,
                           bidirectional=True)
         self.embedding = nn.Linear(
             hidden_size * 2,
@@ -48,7 +48,6 @@ D_model = Model()
 
 if __name__ == '__main__':
     from utils import loss_function_dc
-
     for _index, data in enumerate(test_loader):
         spec_input = data['mix']
         label = data['target']

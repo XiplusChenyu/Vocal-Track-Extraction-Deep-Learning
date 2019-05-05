@@ -17,7 +17,7 @@ class PARAS:
     T_LOG_PATH = '../Log/train_loss.json'
     V_LOG_PATH = '../Log/valid_loss.json'
 
-    BATCH_SIZE = 6
+    BATCH_SIZE = 3
     EPOCH_NUM = 100
 
     USE_CUDA = True
