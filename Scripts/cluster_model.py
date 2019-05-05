@@ -6,7 +6,7 @@ torch.manual_seed(1)
 
 
 class Model(nn.Module):
-    def __init__(self, feature=PARAS.N_MEL, hidden_size=256, embedding_dim=10):
+    def __init__(self, feature=PARAS.N_MEL, hidden_size=256, embedding_dim=PARAS.E_DIM):
         super(Model, self).__init__()
         self.embedding_dim = embedding_dim
 
@@ -14,7 +14,7 @@ class Model(nn.Module):
                           hidden_size=hidden_size,
                           num_layers=4,
                           batch_first=True,
-                          dropout=0.9,
+                          dropout=0.5,
                           bidirectional=True)
         self.embedding = nn.Linear(
             hidden_size * 2,

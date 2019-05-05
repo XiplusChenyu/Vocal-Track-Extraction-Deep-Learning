@@ -41,7 +41,7 @@ class MelConverter:
         else:
             return mel_spectrogram
 
-    def melspec_to_audio(self, mel_spectrogram, log=True, phase=None, transpose=True, audio_out=True):
+    def m(self, mel_spectrogram, log=True, phase=None, transpose=True, audio_out=True):
         if transpose:
             mel_spectrogram = mel_spectrogram.T
         if log:

@@ -16,6 +16,7 @@ class PARAS:
     MODEL_SAVE_PATH_1 = '../Model/dc_model.h5'
     T_LOG_PATH = '../Log/train_loss.json'
     V_LOG_PATH = '../Log/valid_loss.json'
+    E_DIM = 20
 
     BATCH_SIZE = 3
     EPOCH_NUM = 100
