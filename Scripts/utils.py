@@ -1,35 +1,4 @@
 import torch
-import numpy as np
-
-
-def loss_function_dc1(embedding, target):
-    """
-    Implement loss function (invalid)
-    :param embedding: N * TF * Embedding Dim
-    :param target: N * TF * 1 (vocal)
-    :return: Loss value for one batch N * scalar
-    """
-    def create_diag(target_m):
-        d_m = target_m.dot(target_m.T)
-        d_m = np.sum(d_m, axis=1)
-        return np.sqrt(np.diag(d_m))
-
-    def f2_norm(matrix):
-        r = np.linalg.norm(matrix)
-        return r**2
-
-    n, tf, dim = embedding.size()
-
-    loss = 0
-
-    for i in range(n):
-        v = embedding[i].numpy()
-        y = target[i].numpy()
-        d = create_diag(y)
-        loss += f2_norm((v.T.dot(d).dot(v))) - 2*f2_norm((v.T.dot(d).dot(y))) + f2_norm((y.T.dot(d).dot(y)))
-
-    return loss
-
 
 def loss_function_dc(embedding, target):
     """
@@ -39,14 +8,26 @@ def loss_function_dc(embedding, target):
     :return: Loss value for one batch N * scalar
     """
 
-    def l2_loss(x):
+    def create_diag(target_m):
+        """
+        create dialog
+        :param target_m: N * TF * 1 (vocal)
+        :return: N * TF * TF
+        """
+        d_m = torch.bmm(target_m, torch.transpose(target_m, 1, 2))
+        d_m = torch.sum(d_m, dim=2)  # notice there is batch
+        d_m = torch.diag_embed(d_m)
+        return torch.sqrt(d_m)
+
+    def f2_norm(x):
         norm = torch.norm(x, 2)
         return norm ** 2
 
-    loss = l2_loss(torch.bmm(embedding, torch.transpose(embedding, 1, 2))) + \
-        l2_loss(torch.bmm(target, torch.transpose(target, 1, 2))) - \
-        l2_loss(torch.bmm(target, torch.transpose(embedding, 1, 2))) * 2
+    diags = create_diag(target)
+    n, tf, _ = embedding.shape
+    part1 = f2_norm(torch.bmm(torch.bmm(torch.transpose(embedding, 1, 2), diags), embedding))
+    part2 = f2_norm(torch.bmm(torch.bmm(torch.transpose(embedding, 1, 2), diags), target))
+    part3 = f2_norm(torch.bmm(torch.bmm(torch.transpose(target, 1, 2), diags), target))
 
-    return loss / torch.sum(target)
-
+    return part1 - 2 * part2 + part3 / (n*tf)
 
