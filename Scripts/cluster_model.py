@@ -10,18 +10,16 @@ class Model(nn.Module):
         super(Model, self).__init__()
         self.embedding_dim = embedding_dim
 
-        self.blstm = nn.LSTM(input_size=feature,
-                             hidden_size=hidden_size,
-                             num_layers=4,
-                             batch_first=True,
-                             dropout=0.4,
-                             bidirectional=True)
-
+        self.gru = nn.GRU(input_size=feature,
+                          hidden_size=hidden_size,
+                          num_layers=4,
+                          batch_first=True,
+                          dropout=0.4,
+                          bidirectional=True)
         self.embedding = nn.Linear(
             hidden_size * 2,
             PARAS.N_MEL * embedding_dim,
         )
-
         self.activation = nn.Tanh()
 
     @staticmethod
@@ -33,7 +31,8 @@ class Model(nn.Module):
     def forward(self, inp):
         # batch, seq, feature
         n, t, f = inp.size()
-        out, _ = self.blstm(inp)
+        out, _ = self.gru(inp)
+
         out = self.embedding(out)
         out = self.activation(out)
 
@@ -61,8 +60,9 @@ if __name__ == '__main__':
         with torch.no_grad():
 
             predicted = D_model(spec_input)
+            print(predicted.size())
             shape = label.size()
             label = label.view((shape[0], shape[1]*shape[2], -1))
-            print(loss_function_dc(predicted, label))
+            # print(loss_function_dc(predicted, label))
 
         break
