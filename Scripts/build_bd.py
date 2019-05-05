@@ -166,7 +166,6 @@ for (dirpath, dirnames, filenames) in os.walk(PARAS.DATASET_PATH):
             set_path = PARAS.DATASET_PATH + set_name
             tmp_dataset = h5py.File(set_path, 'r')
             tmp_count = tmp_dataset['vocal'].shape[0]
-            all_count += tmp_count
             for i in range(tmp_count):
                 all_dataset['mix'][count] = tmp_dataset['mix'][i]
                 all_dataset['vocal'][count] = tmp_dataset['vocal'][i]
