@@ -6,7 +6,7 @@ torch.manual_seed(1)
 
 
 class Model(nn.Module):
-    def __init__(self, feature=150, hidden_size=256, embedding_dim=10):
+    def __init__(self, feature=PARAS.N_MEL, hidden_size=256, embedding_dim=10):
         super(Model, self).__init__()
         self.embedding_dim = embedding_dim
 

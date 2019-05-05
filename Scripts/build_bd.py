@@ -94,7 +94,7 @@ def frame_feature_extractor(signal, mel_converter=mel_converter):
         S = S[:-1 * (S.shape[0] % PARAS.N_MEL)]  # divide the mel spectrogram
 
     chunk_num = int(S.shape[0] / PARAS.N_MEL)
-    mel_chunks = np.split(S, chunk_num)  # create 150 * 150 data frames
+    mel_chunks = np.split(S, chunk_num)  # create PARAS.N_MEL * PARAS.N_MEL data frames
     return mel_chunks, chunk_num
 
 
@@ -117,15 +117,15 @@ for key, file_dict in file_paths.items():
     c_dataset = h5py.File(c_setpath, 'a')
 
     c_dataset.create_dataset('mix',
-                             shape=(cn, 150, 150),
+                             shape=(cn, PARAS.N_MEL, PARAS.N_MEL),
                              dtype=np.float32)
 
     c_dataset.create_dataset('bg',
-                             shape=(cn, 150, 150),
+                             shape=(cn, PARAS.N_MEL, PARAS.N_MEL),
                              dtype=np.float32)
 
     c_dataset.create_dataset('vocal',
-                             shape=(cn, 150, 150),
+                             shape=(cn, PARAS.N_MEL, PARAS.N_MEL),
                              dtype=np.float32)
 
     for idx in range(cn):
@@ -146,15 +146,15 @@ all_setpath = PARAS.DATASET_PATH + 'all.h5'
 all_dataset = h5py.File(all_setpath, 'a')
 
 all_dataset.create_dataset('mix',
-                           shape=(chunk_count, 150, 150),
+                           shape=(chunk_count, PARAS.N_MEL, PARAS.N_MEL),
                            dtype=np.float32)
 
 all_dataset.create_dataset('vocal',
-                           shape=(chunk_count, 150, 150),
+                           shape=(chunk_count, PARAS.N_MEL, PARAS.N_MEL),
                            dtype=np.float32)
 
 all_dataset.create_dataset('bg',
-                           shape=(chunk_count, 150, 150),
+                           shape=(chunk_count, PARAS.N_MEL, PARAS.N_MEL),
                            dtype=np.float32)
 
 count = 0
@@ -205,9 +205,9 @@ for i, dset in enumerate(sets):
     indice = indices[i]
     file_num = files[i]
 
-    s_set.create_dataset('vocal', shape=(file_num, 150, 150), dtype=np.float32)
-    s_set.create_dataset('mix', shape=(file_num, 150, 150), dtype=np.float32)
-    s_set.create_dataset('bg', shape=(file_num, 150, 150), dtype=np.float32)
+    s_set.create_dataset('vocal', shape=(file_num, PARAS.N_MEL, PARAS.N_MEL), dtype=np.float32)
+    s_set.create_dataset('mix', shape=(file_num, PARAS.N_MEL, PARAS.N_MEL), dtype=np.float32)
+    s_set.create_dataset('bg', shape=(file_num, PARAS.N_MEL, PARAS.N_MEL), dtype=np.float32)
 
     count = 0
     for i in indice:

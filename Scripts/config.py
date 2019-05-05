@@ -5,7 +5,7 @@ import torch
 class PARAS:
     SR = 16000
     N_FFT = 512
-    N_MEL = 150
+    N_MEL = 128
     SAMPLE_TIME = 1   # 1s frame
 
     DATASET_PATH = '../Dataset/'
