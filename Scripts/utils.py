@@ -43,9 +43,9 @@ def loss_function_dc(embedding, target):
         norm = torch.norm(x, 2)
         return norm ** 2
 
-    loss = l2_loss(torch.bmm(torch.transpose(embedding, 1, 2), embedding)) + \
-        l2_loss(torch.bmm(torch.transpose(target, 1, 2), target)) - \
-        l2_loss(torch.bmm(torch.transpose(embedding, 1, 2), target)) * 2
+    loss = l2_loss(torch.bmm(embedding, torch.transpose(embedding, 1, 2))) + \
+        l2_loss(torch.bmm(target, torch.transpose(target, 1, 2))) - \
+        l2_loss(torch.bmm(target, torch.transpose(embedding, 1, 2))) * 2
 
     return loss / torch.sum(target)
 

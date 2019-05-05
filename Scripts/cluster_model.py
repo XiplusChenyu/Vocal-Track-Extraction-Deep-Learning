@@ -39,7 +39,6 @@ class Model(nn.Module):
 
         out = out.view(n, -1, self.embedding_dim)
         # batch, TF, embedding
-
         # normalization over embedding dim
         out = self.l2_normalize(out, -1)
 
@@ -49,7 +48,6 @@ class Model(nn.Module):
 D_model = Model()
 
 if __name__ == '__main__':
-    print(D_model)
     from utils import loss_function_dc
 
     for _index, data in enumerate(test_loader):
