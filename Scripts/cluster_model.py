@@ -1,12 +1,12 @@
 import torch.nn as nn
 import torch
-from data_loader import test_loader
+from data_loader import torch_dataset_loader
 from config import PARAS
 torch.manual_seed(1)
 
 
 class Model(nn.Module):
-    def __init__(self, feature=PARAS.N_MEL, hidden_size=256, embedding_dim=PARAS.E_DIM):
+    def __init__(self, feature=PARAS.N_MEL, hidden_size=PARAS.HS, embedding_dim=PARAS.E_DIM):
         super(Model, self).__init__()
         self.embedding_dim = embedding_dim
 
@@ -47,7 +47,7 @@ class Model(nn.Module):
 D_model = Model()
 
 if __name__ == '__main__':
-    from utils import loss_function_dc
+    test_loader = torch_dataset_loader(PARAS.DATASET_PATH + 'test.h5', PARAS.BATCH_SIZE, True, PARAS.kwargs)
     for _index, data in enumerate(test_loader):
         spec_input = data['mix']
         label = data['target']
@@ -62,6 +62,4 @@ if __name__ == '__main__':
             print(predicted.size())
             shape = label.size()
             label = label.view((shape[0], shape[1]*shape[2], -1))
-            # print(loss_function_dc(predicted, label))
-
         break

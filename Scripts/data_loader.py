@@ -69,12 +69,8 @@ def torch_dataset_loader(dataset, batch_size, shuffle, kwargs):
     return loader
 
 
-train_loader = torch_dataset_loader(PARAS.TRAIN_DATA_PATH, PARAS.BATCH_SIZE, True, PARAS.kwargs)
-validation_loader = torch_dataset_loader(PARAS.VAL_DATA_PATH, PARAS.BATCH_SIZE, False, PARAS.kwargs)
-test_loader = torch_dataset_loader(PARAS.TEST_DATA_PATH, PARAS.BATCH_SIZE, False, PARAS.kwargs)
-
-
 if __name__ == '__main__':
+    test_loader = torch_dataset_loader(PARAS.DATASET_PATH+'test.h5', PARAS.BATCH_SIZE, True, PARAS.kwargs)
 
     for index, data_item in enumerate(test_loader):
         print(data_item['vocal'].shape)

@@ -1,26 +1,21 @@
 import time
 import json
 import numpy as np
-from cluster_model import D_model
 import torch
-from torch import optim
-from utils import loss_function_dc
+
 from config import PARAS
-from data_loader import train_loader, validation_loader, test_loader
-
-PARAS.LOG_STEP = len(train_loader) // 4
-optimizer = torch.optim.RMSprop(D_model.parameters(), lr=1e-5)
-scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
+from torch import optim
+from utils import loss_function, loss_function_simple
 
 
-def train(model, epoch, versatile=True):
+def train(model, loader, epoch_index, use_simple, optimizer, versatile=True):
     start_time = time.time()
     model = model.train()
     train_loss = 0.
-    batch_num = len(train_loader)
+    batch_num = len(loader)
     _index = 0
 
-    for _index, data in enumerate(train_loader):
+    for _index, data in enumerate(loader):
         spec_input, target = data['mix'], data['target']
         shape = spec_input.size()
         target = target.view((shape[0], shape[1] * shape[2], -1))
@@ -32,7 +27,8 @@ def train(model, epoch, versatile=True):
         optimizer.zero_grad()
         predicted = model(spec_input)
 
-        loss_value = loss_function_dc(predicted, target)
+        loss_value = loss_function(predicted, target) if not use_simple \
+            else loss_function_simple(predicted, target)
 
         loss_value.backward()
         optimizer.step()
@@ -43,7 +39,7 @@ def train(model, epoch, versatile=True):
             if (_index + 1) % PARAS.LOG_STEP == 0:
                 elapsed = time.time() - start_time
                 print('Epoch{:3d} | {:3d}/{:3d} batches | {:5.2f}ms/ batch | LOSS: {:5.4f} |'
-                      .format(epoch, _index + 1, batch_num,
+                      .format(epoch_index, _index + 1, batch_num,
                               elapsed * 1000 / (_index + 1),
                               train_loss / (_index + 1),))
 
@@ -51,18 +47,19 @@ def train(model, epoch, versatile=True):
 
     print('-' * 99)
     print('End of training epoch {:3d} | time: {:5.2f}s | LOSS: {:5.4f} |'
-          .format(epoch, (time.time() - start_time),
+          .format(epoch_index, (time.time() - start_time),
                   train_loss))
 
     return train_loss
 
 
-def validate_test(model, epoch, test=False):
+def validate_test(model, epoch, use_loader, use_simple):
     start_time = time.time()
     model = model.eval()
     v_loss = 0.
-    data_loader_use = validation_loader if not test else test_loader
+    data_loader_use = use_loader
     _index = 0
+
     for _index, data in enumerate(data_loader_use):
         spec_input, target = data['mix'], data['target']
         shape = spec_input.size()
@@ -76,7 +73,8 @@ def validate_test(model, epoch, test=False):
 
             predicted = model(spec_input)
 
-            loss_value = loss_function_dc(predicted, target)
+            loss_value = loss_function(predicted, target) if not use_simple \
+                else loss_function_simple(predicted, target)
 
             v_loss += loss_value.data.item()
 
@@ -90,34 +88,51 @@ def validate_test(model, epoch, test=False):
     return v_loss
 
 
-if __name__ == '__main__':
+def main_train(model, train_loader, valid_loader, log_name, save_name,
+               use_simple=PARAS.USE_SIMPLE,
+               lr=PARAS.LR,
+               epoch_num=PARAS.EPOCH_NUM):
+
+    start_time = time.time()
+    PARAS.LOG_STEP = len(train_loader) // 4
+
+    optimizer = torch.optim.RMSprop(model.parameters(), lr=lr)
+    scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
+
     t_loss, v_loss = list(), list()
     decay_cnt = 0
 
-    for epoch in range(1, PARAS.EPOCH_NUM + 1):
-        if PARAS.CUDA:
-            D_model.cuda()
+    build_dict = dict()
 
-        train_loss = train(D_model, epoch)
-        validation_loss = validate_test(D_model, epoch, test=False)
+    for epoch in range(1, epoch_num + 1):
+        if PARAS.CUDA:
+            model.cuda()
+
+        train_loss = train(model, train_loader, epoch, use_simple, optimizer)
+        validation_loss = validate_test(model, epoch, valid_loader, use_simple)
 
         t_loss.append(train_loss)
         v_loss.append(validation_loss)
 
+        build_dict = {
+            "train_loss": t_loss,
+            "valid_loss": v_loss,
+        }
+
+        with open(PARAS.LOG_PATH + log_name, 'w+') as f:
+            print("****Save {0} Epoch in {1}****".format(epoch, PARAS.LOG_PATH + log_name))
+            json.dump(build_dict, f)
+
         if len(v_loss) > 10 and np.max(v_loss[:-8]) == v_loss[-1]:
             print("****exit in epoch {0}*****".format(epoch))
-            with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
-                json.dump(t_loss, t)
-                json.dump(v_loss, v)
-
             break
 
         # use loss to find the best model
         if np.min(t_loss) == t_loss[-1]:
             print('***Found Best Training Model***')
         if np.min(v_loss) == v_loss[-1]:
-            with open(PARAS.MODEL_SAVE_PATH_1, 'wb') as f:
-                torch.save(D_model.cpu().state_dict(), f)
+            with open(PARAS.MODEL_SAVE_PATH + save_name, 'wb') as f:
+                torch.save(model.cpu().state_dict(), f)
                 print('***Best Validation Model Found and Saved***')
 
         print('-' * 99)
@@ -131,6 +146,10 @@ if __name__ == '__main__':
             print('***Learning rate decreased***')
             print('-' * 99)
 
-        with open(PARAS.TEST_DATA_PATH, 'w+') as t, open(PARAS.VAL_DATA_PATH, 'w+') as v:
-            json.dump(t_loss, t)
-            json.dump(v_loss, v)
+    total_time = round((time.time() - start_time) / 60, 2)
+    print("END TRAINING, TOTAL TIME {0}min".format(total_time))
+
+    return build_dict
+
+
+

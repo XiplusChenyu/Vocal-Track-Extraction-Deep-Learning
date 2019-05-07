@@ -9,17 +9,17 @@ class PARAS:
     SAMPLE_TIME = 1   # 1s frame
 
     DATASET_PATH = '../Dataset/'
-    TRAIN_DATA_PATH = '../Dataset/train.h5'
-    VAL_DATA_PATH = '../Dataset/valid.h5'
-    TEST_DATA_PATH = '../Dataset/test.h5'
 
-    MODEL_SAVE_PATH_1 = '../Model/dc_model.h5'
-    T_LOG_PATH = '../Log/train_loss.json'
-    V_LOG_PATH = '../Log/valid_loss.json'
+    MODEL_SAVE_PATH = '../Model/'
+    LOG_PATH = '../Log/'
     E_DIM = 20
 
+    USE_SIMPLE = False  # which
+
     BATCH_SIZE = 3
-    EPOCH_NUM = 100
+    EPOCH_NUM = 50
+    LR = 1e-5  # learning rate
+    HS = 256  # DC Model Hidden size
 
     USE_CUDA = True
     CUDA = torch.cuda.is_available() and USE_CUDA
