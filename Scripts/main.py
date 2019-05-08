@@ -1,5 +1,5 @@
 from cluster_model import D_model
-from train import main_train
+from dc_train import main_train
 from config import PARAS
 from data_loader import torch_dataset_loader
 

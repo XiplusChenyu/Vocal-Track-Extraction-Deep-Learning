@@ -19,7 +19,7 @@ class PARAS:
     BATCH_SIZE = 3
     EPOCH_NUM = 50
     LR = 1e-5  # learning rate
-    HS = 256  # DC Model Hidden size
+    HS = 500  # DC Model Hidden size
 
     USE_CUDA = True
     CUDA = torch.cuda.is_available() and USE_CUDA
