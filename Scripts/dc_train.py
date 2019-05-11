@@ -16,7 +16,7 @@ def train(model, loader, epoch_index, use_simple, optimizer, versatile=True):
     _index = 0
 
     for _index, data in enumerate(loader):
-        spec_input, target = data['mix'], data['target']
+        spec_input, target = data['mix'], data['binary_mask']
         shape = spec_input.size()
         target = target.view((shape[0], shape[1] * shape[2], -1))
 
@@ -61,7 +61,7 @@ def validate_test(model, epoch, use_loader, use_simple):
     _index = 0
 
     for _index, data in enumerate(data_loader_use):
-        spec_input, target = data['mix'], data['target']
+        spec_input, target = data['mix'], data['binary_mask']
         shape = spec_input.size()
         target = target.view((shape[0], shape[1] * shape[2], -1))
 

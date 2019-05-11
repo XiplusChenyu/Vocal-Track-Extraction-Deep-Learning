@@ -5,7 +5,7 @@ import torch
 
 from config import PARAS
 from torch import optim
-from utils import loss_function, mask_bce_loss
+from utils import loss_function, mask_scale_loss
 
 
 def train(model, loader, epoch_index, optimizer_dc, optimizer_mask, versatile=True):
@@ -18,20 +18,21 @@ def train(model, loader, epoch_index, optimizer_dc, optimizer_mask, versatile=Tr
     _index = 0
 
     for _index, data in enumerate(loader):
-        spec_input, target = data['mix'], data['target']
+        spec_input, target_dc, target_mask = data['mix'], data['binary_mask'], data['scale_mask']
         shape = spec_input.size()
-        target_dc = target.view((shape[0], shape[1] * shape[2], -1))
+        target_dc = target_dc.view((shape[0], shape[1] * shape[2], -1))
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
-            target = target.cuda()
+            target_dc = target_dc.cuda()
+            target_mask = target_mask.cuda()
 
         optimizer_dc.zero_grad()
         optimizer_mask.zero_grad()
 
         predicted_dc, predicted_mask = model(spec_input)
 
-        loss_value_mask = mask_bce_loss(predicted_mask, target)
+        loss_value_mask = mask_scale_loss(predicted_mask, target_mask)
         loss_value_dc = loss_function(predicted_dc, target_dc)
 
         loss_value_mask.backward()
@@ -71,19 +72,20 @@ def validate_test(model, epoch, use_loader):
     _index = 0
 
     for _index, data in enumerate(data_loader_use):
-        spec_input, target = data['mix'], data['target']
+        spec_input, target_dc, target_mask = data['mix'], data['binary_mask'], data['scale_mask']
         shape = spec_input.size()
-        target_dc = target.view((shape[0], shape[1] * shape[2], -1))
+        target_dc = target_dc.view((shape[0], shape[1] * shape[2], -1))
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
-            target = target.cuda()
+            target_dc = target_dc.cuda()
+            target_mask = target_mask.cuda()
 
         with torch.no_grad():
 
             predicted_dc, predicted_mask = model(spec_input)
 
-            loss_value_mask = mask_bce_loss(predicted_mask, target)
+            loss_value_mask = mask_scale_loss(predicted_mask, target_mask)
             loss_value_dc = loss_function(predicted_dc, target_dc)
 
             v_loss_dc += loss_value_dc.data.item()

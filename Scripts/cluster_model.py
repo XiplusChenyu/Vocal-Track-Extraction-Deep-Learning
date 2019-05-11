@@ -47,10 +47,12 @@ class Model(nn.Module):
 D_model = Model()
 
 if __name__ == '__main__':
+    from utils import loss_function
+
     test_loader = torch_dataset_loader(PARAS.DATASET_PATH + 'test.h5', PARAS.BATCH_SIZE, True, PARAS.kwargs)
     for _index, data in enumerate(test_loader):
         spec_input = data['mix']
-        label = data['target']
+        label = data['binary_mask']
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
@@ -62,4 +64,5 @@ if __name__ == '__main__':
             print(predicted.size())
             shape = label.size()
             label = label.view((shape[0], shape[1]*shape[2], -1))
+            print(loss_function(predicted, label))
         break
