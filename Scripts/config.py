@@ -14,9 +14,9 @@ class PARAS:
     LOG_PATH = '../Log/'
     E_DIM = 20
 
-    USE_SIMPLE = False  # which
+    USE_SIMPLE = False  # which is always false the simple one should be removed
 
-    BATCH_SIZE = 3
+    BATCH_SIZE = 16
     EPOCH_NUM = 50
     LR = 1e-5  # learning rate
     HS = 500  # DC Model Hidden size

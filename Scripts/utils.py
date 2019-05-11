@@ -48,7 +48,7 @@ def loss_function(embedding, target):
     loss1 = torch.bmm(torch.transpose(embedding, 1, 2), embedding)
     loss2 = torch.bmm(torch.transpose(target, 1, 2), target)
     loss3 = torch.bmm(torch.transpose(embedding, 1, 2), target)
-    result = torch.sum(torch.norm(loss1, dim=(1, 2)) + torch.norm(loss2, dim=(1, 2)) - 2 * torch.norm(loss3, dim=(1, 2)))
+    result = torch.sum(torch.norm(loss1, 2)**2 + torch.norm(loss2, 2)**2 - 2 * torch.norm(loss3, 2)**2)
     return result / PARAS.BATCH_SIZE
 
 
