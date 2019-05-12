@@ -66,6 +66,10 @@ def mask_scale_loss(mask: torch.Tensor, target: torch.Tensor):
     return criterion(music_mask, target)
 
 
+def mask_scale_loss_unet(mask: torch.Tensor, target: torch.Tensor):
+    return criterion(mask, target)
+
+
 def embedding_to_mask(embedding_out):
     """
     Convert embedding out as a binary mask
