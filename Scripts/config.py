@@ -16,7 +16,7 @@ class PARAS:
 
     USE_SIMPLE = False  # which is always false the simple one should be removed
 
-    BATCH_SIZE = 16
+    BATCH_SIZE = 32
     EPOCH_NUM = 50
     LR = 1e-5  # learning rate
     HS = 500  # DC Model Hidden size

@@ -49,10 +49,10 @@ def loss_function(embedding, target):
     loss2 = torch.bmm(torch.transpose(target, 1, 2), target)
     loss3 = torch.bmm(torch.transpose(embedding, 1, 2), target)
     result = torch.sum(torch.norm(loss1, 2)**2 + torch.norm(loss2, 2)**2 - 2 * torch.norm(loss3, 2)**2)
-    return result / PARAS.BATCH_SIZE
+    return result / (n*tf*2019)
 
 
-criterion = torch.nn.MSELoss()
+criterion = torch.nn.BCELoss()
 
 
 def mask_scale_loss(mask: torch.Tensor, target: torch.Tensor):
@@ -63,7 +63,7 @@ def mask_scale_loss(mask: torch.Tensor, target: torch.Tensor):
     :return: we should generate a IoU mask over the voice source
     """
     music_mask, _ = torch.unbind(mask, dim=3)  # split the output mask
-    return criterion(mask, target)
+    return criterion(music_mask, target)
 
 
 def embedding_to_mask(embedding_out):

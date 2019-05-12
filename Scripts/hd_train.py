@@ -35,7 +35,7 @@ def train(model, loader, epoch_index, optimizer_dc, optimizer_mask, versatile=Tr
         loss_value_mask = mask_scale_loss(predicted_mask, target_mask)
         loss_value_dc = loss_function(predicted_dc, target_dc)
 
-        loss_value_mask.backward()
+        loss_value_mask.backward(retain_graph=True)
         loss_value_dc.backward()
         optimizer_dc.step()
         optimizer_mask.step()
