@@ -103,8 +103,8 @@ def main_train(model, train_loader, valid_loader, log_name, save_name,
         if PARAS.CUDA:
             model.cuda()
 
-        train_loss = train(model, train_loader, epoch, use_simple, optimizer)
-        validation_loss = validate_test(model, epoch, valid_loader, use_simple)
+        train_loss = train(model, train_loader, epoch, optimizer)
+        validation_loss = validate_test(model, epoch, valid_loader)
 
         t_loss.append(train_loss)
         v_loss.append(validation_loss)
