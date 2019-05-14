@@ -130,7 +130,7 @@ def main_train(model, train_loader, valid_loader, log_name, save_name,
         td_loss.append(train_loss[0])
         tm_loss.append(train_loss[1])
         vd_loss.append(validation_loss[0])
-        vm_loss.append(train_loss[1])
+        vm_loss.append(validation_loss[1])
 
         build_dict = {
             "train_loss_dc": td_loss,
