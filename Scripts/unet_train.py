@@ -84,7 +84,6 @@ def validate_test(model, epoch, use_loader):
 
 
 def main_train(model, train_loader, valid_loader, log_name, save_name,
-               use_simple=PARAS.USE_SIMPLE,
                lr=PARAS.LR,
                epoch_num=PARAS.EPOCH_NUM):
 

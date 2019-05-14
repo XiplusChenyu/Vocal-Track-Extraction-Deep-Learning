@@ -60,7 +60,7 @@ if __name__ == '__main__':
     test_loader = torch_dataset_loader(PARAS.DATASET_PATH + 'test.h5', PARAS.BATCH_SIZE, True, PARAS.kwargs)
     for _index, data in enumerate(test_loader):
         spec_input = data['mix']
-        label = data['target']
+        label = data['binary_mask']
 
         if PARAS.CUDA:
             spec_input = spec_input.cuda()
