@@ -27,8 +27,16 @@ There are four models in this project: Deep Clustering Model, Hybrid Deep Cluste
   - <code>evaluation.py</code>: define evaluation functions
   - <code>music_decoder.py</code>: retrieve audio file from model outputs
   
-## Sample outputs
-<a href=https://drive.google.com/file/d/1DQ9MeJFN8QEesQyPz-pJY7Kl58qlDQE2/view>Original Music</a> <= <a href=https://drive.google.com/file/d/1wyLOb22Vg6qpMhmi6AqQYDf4UcaIQtBs/view> Vocal Track</a><br>
+## Current Sample Outputs
+### Audios
+<a href=https://drive.google.com/file/d/1DQ9MeJFN8QEesQyPz-pJY7Kl58qlDQE2/view>Original Music</a> (<a href=https://drive.google.com/file/d/1wyLOb22Vg6qpMhmi6AqQYDf4UcaIQtBs/view> Vocal Track</a>)<br>
 ==><a href=https://drive.google.com/file/d/1fNsiGOwnoctnAHyTXx5Jc5Gvqz9gSBJ9/view> Hybrid Deep Clustering Model </a><br>
 ==><a href=https://drive.google.com/file/d/1Ck8FNQrPbp0hc5mZ_rGQ8SXnduj6KngG/view> U-net Model </a><br>
 ==><a href=https://drive.google.com/file/d/1cf57rvIa7g6nA5OTiYfUdu-vEJeLLySs/view> UH-net Model </a><br>
+
+### Masks
+- Masked Power Spectrograms:
+<img src=https://github.com/XiplusChenyu/vocal-track-extraction-using-deep-learning/blob/master/Pics/final_mask.png>
+
+- Generated Masks:
+<img src=https://github.com/XiplusChenyu/vocal-track-extraction-using-deep-learning/blob/master/Pics/final_empty_mask.png>
