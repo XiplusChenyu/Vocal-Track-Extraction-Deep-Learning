@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="433fa81f-8cdc-4fd3-a4dc-d89a88361d2e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Log/dc_model_may_new_set_May11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/dc_model_may_new_set_May11_after100.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/dc_model_may_new_set_May11_after50.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/hd_model_newset_may_11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/hd_model_newset_may_11_after100.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/hd_model_newset_may_11_after50.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/dc_model_may_11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/dc_model_may_12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/dc_model_may_6.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/dc_model_may_6_simple.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/hd_model_may_11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/hybrid_model_may_8.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/old logs/hybrid_model_may_8_40.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/uhnet_model_1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Log/unet_model_1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/result analysis.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="433fa81f-8cdc-4fd3-a4dc-d89a88361d2e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +21,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/unet_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
+            <state relative-caret-position="540">
               <caret line="36" selection-start-line="36" selection-end-line="36" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -51,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hybrid_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
+            <state relative-caret-position="645">
               <caret line="43" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -63,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evaluation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="195">
               <caret line="13" column="26" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -75,7 +57,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hd_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1740">
+            <state relative-caret-position="1845">
               <caret line="123" column="22" selection-start-line="123" selection-start-column="22" selection-end-line="123" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -87,7 +69,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="210">
               <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
@@ -99,7 +81,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/unet_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1410">
+            <state relative-caret-position="1515">
               <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -141,7 +123,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1245">
+            <state relative-caret-position="1290">
               <caret line="86" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -383,16 +365,17 @@
       <workItem from="1557819407301" duration="52000" />
       <workItem from="1557878756419" duration="7754000" />
       <workItem from="1558190945507" duration="184000" />
+      <workItem from="1558206075886" duration="49000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61893000" />
+    <option name="totallyTimeSpent" value="61942000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14102565" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14224665" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -514,7 +497,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/unet_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
+        <state relative-caret-position="540">
           <caret line="36" selection-start-line="36" selection-end-line="36" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -524,7 +507,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hybrid_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
+        <state relative-caret-position="645">
           <caret line="43" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -534,7 +517,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="195">
           <caret line="13" column="26" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -544,7 +527,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hd_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
+        <state relative-caret-position="1845">
           <caret line="123" column="22" selection-start-line="123" selection-start-column="22" selection-end-line="123" selection-end-column="22" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -554,7 +537,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="210">
           <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
@@ -564,7 +547,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/unet_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
+        <state relative-caret-position="1515">
           <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -588,7 +571,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
+        <state relative-caret-position="1290">
           <caret line="86" selection-start-line="86" selection-end-line="86" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
