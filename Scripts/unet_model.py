@@ -154,25 +154,27 @@ U_model = UNet()  # The model also use bce loss for train
 
 if __name__ == '__main__':
     UH_model = UNetEnhanced('hd_model_may_11.pt')
+    model_dict = torch.load(PARAS.MODEL_SAVE_PATH + 'hd_model_may_11.pt', map_location='cpu')
+    print(model_dict.keys())
     # from torchsummary import summary
     # summary(UH_model, (1, 128, 128), batch_size=16)
 
-    from data_loader import torch_dataset_loader
-    from utils import mask_scale_loss_unet
-
-    test_loader = torch_dataset_loader(PARAS.DATASET_PATH + 'test.h5', PARAS.BATCH_SIZE, True, PARAS.kwargs)
-    for _index, data in enumerate(test_loader):
-        spec_input = data['mix']
-        spec_input = spec_input.unsqueeze(1)
-        label = data['scale_mask']
-        UH_model.eval()
-
-        if PARAS.CUDA:
-            spec_input = spec_input.cuda()
-            label = label.cuda()
-
-        with torch.no_grad():
-
-            predicted = UH_model(spec_input)
-            print(mask_scale_loss_unet(predicted, label))
-        break
+    # from data_loader import torch_dataset_loader
+    # from utils import mask_scale_loss_unet
+    #
+    # test_loader = torch_dataset_loader(PARAS.DATASET_PATH + 'test.h5', PARAS.BATCH_SIZE, True, PARAS.kwargs)
+    # for _index, data in enumerate(test_loader):
+    #     spec_input = data['mix']
+    #     spec_input = spec_input.unsqueeze(1)
+    #     label = data['scale_mask']
+    #     UH_model.eval()
+    #
+    #     if PARAS.CUDA:
+    #         spec_input = spec_input.cuda()
+    #         label = label.cuda()
+    #
+    #     with torch.no_grad():
+    #
+    #         predicted = UH_model(spec_input)
+    #         print(mask_scale_loss_unet(predicted, label))
+    #     break
